@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    //ultima versao do JS.
+    "target": "ES6",
+    // modulo do JS mais usado
+    "module": "commonjs",
+    // diretorio base
+    "rootDir": "./src",
+    // versao para o html, compilar
+    "outDir": "./build",
+    //exportar e impotar
+    "esModuleInterop": true,
+    // mudar o nome do arquivo de forma sistematica
+    "forceConsistentCasingInFileNames": true,
+    // uma forma do navegador entender , mostra erros que nao existem no JS
+    "strict": true,
+    // pula a verificaçao de bibliotecas
+    "skipLibCheck": true
+  }
+}
