@@ -10,4 +10,6 @@ CREATE TABLE
         created_at TEXT NOT NULL
     );
 
+DROP TABLE users;
+
 SELECT * FROM users;
