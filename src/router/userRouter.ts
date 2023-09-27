@@ -19,3 +19,5 @@ const userController = new UserController(
 userRouter.get("/", userController.oiMirian)
 
 userRouter.post('/signup', userController.signup)
+
+userRouter.post('/login', userController.login)
