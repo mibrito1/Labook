@@ -25,3 +25,5 @@ CREATE TABLE
         updated_at TEXT NOT NULL,
         Foreign Key (creator_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
+
+SELECT * FROM posts;
