@@ -5,6 +5,9 @@ import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Users, userRole } from "../models/Users";
 import { TokenManager, TokenPayload } from "../services/TokenManager";
+import { LoginInputDTO, LoginOutputDTO } from "../dtos/users/login.dto";
+import { NotfoundError } from "../erros/NotFoundError";
+import { BadError } from "../erros/BadError";
 
 export class UserBusiness {  // aqui vai tratar as regras do negocio, as regras do projeto
     constructor(private idGenerator: IdGenerator,
@@ -23,7 +26,7 @@ export class UserBusiness {  // aqui vai tratar as regras do negocio, as regras 
         if (
             userExist
         ) {
-            throw new Error(
+            throw new BadError(
                 "usuario ja existe"
             )
         }
@@ -43,6 +46,31 @@ export class UserBusiness {  // aqui vai tratar as regras do negocio, as regras 
 
         }
         return output
+    }
+
+    public login = async (input: LoginInputDTO): Promise<LoginOutputDTO> => {
+        const {
+            email, password
+        } = input
+        const emailExiste = await this.userDataBase.getUserByEmail(email)
+        if (
+            !emailExiste
+        ) {
+            throw new NotfoundError()
+        }
+        const passwordValido = await this.hashManager.compare(password, emailExiste.password)
+        if (
+            !passwordValido
+        ) {
+            throw new BadError("Senha invalida!")
+        }
+        const tokenPayload: TokenPayload = {
+            id: emailExiste.id,
+            name: emailExiste.name,
+            role: emailExiste.role
+        }
+        const token = this.tokenManager.createToken(tokenPayload)
+        return { message: "Login feito com sucesso!", token: token }
     }
 
 }

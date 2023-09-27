@@ -13,3 +13,15 @@ CREATE TABLE
 DROP TABLE users;
 
 SELECT * FROM users;
+
+CREATE TABLE
+    posts(
+        id TEXT UNIQUE PRIMARY KEY NOT NULL,
+        creator_id TEXT NOT NULL,
+        content TEXT NOT NULL,
+        likes INTEGER NOT NULL,
+        dislikes INTEGER NOT NULL,
+        created_at TEXT DEFAULT (DATE('now', 'localtime')),
+        updated_at TEXT NOT NULL,
+        Foreign Key (creator_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
