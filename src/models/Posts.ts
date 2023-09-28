@@ -13,6 +13,10 @@ export interface PostDb {
     created_at: string,
     updated_at: string
 }
+export interface PostDbWithCreatorName extends PostDb {
+    creator_name: string
+}
+
 export interface PostModel {
     id: string,
     creatorId: string,
