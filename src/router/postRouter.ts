@@ -13,3 +13,7 @@ const postControler = new PostController(new PostBusiness(
     new PostDataBase()
 ))
 postRouter.post("/", postControler.creatPost)
+
+postRouter.get("/", postControler.getPost)
+
+postRouter.delete("/:id", postControler.deletePost)
