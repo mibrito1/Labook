@@ -1,4 +1,8 @@
-import { privateDecrypt } from "crypto"
+export interface LIKEDISLIKEDB {
+    user_id: string,
+    post_id: string,
+    like: number
+}
 
 export enum POST_LIKE {
     ALREADY_LIKED = "ALREADY_LIKED",

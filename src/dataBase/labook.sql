@@ -27,3 +27,12 @@ CREATE TABLE
     );
 
 SELECT * FROM posts;
+
+CREATE TABLE
+    like_dislike(
+        user_id TEXT NOT NULL,
+        post_id TEXT NOT NULL,
+        like INTEGER NOT NULL,
+        Foreign Key (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        Foreign Key (post_id) REFERENCES posts(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );

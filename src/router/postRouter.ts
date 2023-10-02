@@ -17,3 +17,10 @@ postRouter.post("/", postControler.creatPost)
 postRouter.get("/", postControler.getPost)
 
 postRouter.delete("/:id", postControler.deletePost)
+
+postRouter.put("/:id", postControler.editPost)
+
+postRouter.put("/:id/like", postControler.likeDislikePost)
+
+
+
