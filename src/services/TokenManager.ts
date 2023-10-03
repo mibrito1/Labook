@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { userRole } from '../models/Users'
+import dotenv from "dotenv"
+dotenv.config()
 
 export interface TokenPayload {  // aqui define os tipos de dados
     id: string,
@@ -12,9 +14,9 @@ export class TokenManager {
     public createToken = (payload: TokenPayload): string => {  //tem que ser igual ao que esta no tokenpayload
         const token = jwt.sign( //metodo para criar token
             payload,
-            "senhaSegura",
+            process.env.JWT_KEY as string,
             {
-                expiresIn: "7d"  //quantos dias o token dura
+                expiresIn: process.env.JWT_EXPIRES_IN //quantos dias o token dura
             }
         )
 
@@ -25,7 +27,7 @@ export class TokenManager {
         try {
             const payload = jwt.verify( // verifica se é verdadeiro
                 token,
-                "senhaSegura",
+                process.env.JWT_KEY as string,
             )
 
             return payload as TokenPayload

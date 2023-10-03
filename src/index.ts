@@ -2,11 +2,13 @@ import express from "express"
 import cors from "cors"
 import { userRouter } from "./router/userRouter"
 import { postRouter } from "./router/postRouter"
+import dotenv from "dotenv"
+dotenv.config()
 
 const api = express()
 api.use(express.json()) //transforma dados em json (textos)
 api.use(cors())
-api.listen(3003, () => {
+api.listen(Number(process.env.PORT), () => {
     console.log("listeng on 3003")
 })
 

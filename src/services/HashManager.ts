@@ -1,11 +1,13 @@
 import bcrypt from 'bcryptjs'
+import dotenv from "dotenv"
+dotenv.config()
 
 
 export class HashManager {
     public hash = async (
         plaintext: string // paintex é a senha do usuario
     ): Promise<string> => {           // toda funçao async sempre devolve uma promessa, porque o dado ainda nao esta pronto
-        const rounds = 12     // numero de rodadas para misturar
+        const rounds = Number(process.env.BCRYPT_COST)    // numero de rodadas para misturar
         const salt = await bcrypt.genSalt(rounds)  // caracteres aleatorios
         const hash = await bcrypt.hash(plaintext, salt)  // resultado da mistura
 
